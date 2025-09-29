@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Jadidchilik – Milliy Uyg‘onish va Ozodlik Sari Qadam</title>
+    <style>
+        :root {
+            --bg: #ffffff;
+            --card: #7e5b1b;
+            --accent: #d9b06a;
+            --muted: #c9bead;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Georgia', serif;
+            color: #f7efe6;
+            background: linear-gradient(180deg, #6e4a02 0%, #695c486d 100%);
+        }
+
+        .deck {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px
+        }
+
+        .slide {
+            width: 1000px;
+            max-width: 96vw;
+            height: 630px;
+            background: linear-gradient(180deg, rgba(255, 245, 220, 0.04), rgba(0, 0, 0, 0.28));
+            border-radius: 14px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+            padding: 34px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 240, 200, 0.03)
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px
+        }
+
+        .title {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--accent);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6)
+        }
+
+        .author {
+            font-size: 13px;
+            color: var(--muted)
+        }
+
+        .content {
+            display: flex;
+            gap: 20px;
+            height: calc(100% - 72px)
+        }
+
+        .text {
+            flex: 1;
+            overflow: auto;
+            padding-right: 10px
+        }
+
+        .text h2 {
+            margin: 6px 0 10px;
+            font-size: 20px;
+            color: var(--accent);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6)
+        }
+
+        .text p {
+            line-height: 1.6;
+            color: #f3ead8
+        }
+
+        .image {
+            width: 420px;
+            flex: 0 0 420px;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .frame {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.18));
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02)
+        }
+
+        .image img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 6px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+            transition: transform 0.5s cubic-bezier(.2, .9, .3, 1)
+        }
+
+        .image img:hover {
+            transform: scale(1.04) rotate(-0.6deg)
+        }
+
+        .num {
+            position: absolute;
+            right: 22px;
+            bottom: 18px;
+            font-size: 13px;
+            color: var(--muted)
+        }
+
+        .controls {
+            position: absolute;
+            left: 22px;
+            bottom: 18px;
+            display: flex;
+            gap: 10px
+        }
+
+        button {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.12));
+            border: 1px solid rgba(255, 240, 200, 0.06);
+            color: #f7efe6;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+            transition: all .25s
+        }
+
+        button:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6)
+        }
+
+        .big-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            flex-direction: column;
+            gap: 12px;
+            text-align: center
+        }
+
+        .big-title h1 {
+            font-size: 42px;
+            color: var(--accent);
+            margin: 0;
+            letter-spacing: 0.4px
+        }
+
+        .big-title p {
+            color: #f3ead8;
+            font-size: 16px
+        }
+
+        ul.reja {
+            list-style: decimal inside;
+            line-height: 1.8;
+            color: #f3ead8;
+            font-size: 18px;
+            padding-left: 0
+        }
+
+        ul.reja li {
+            margin-bottom: 8px
+        }
+
+        /* hover for headings */
+        .slide header .title:hover {
+            color: #ffe6a8
+        }
+
+        /* Animations */
+        .slide {
+            opacity: 0;
+            transform: translateY(18px);
+            animation: enter .6s forwards
+        }
+
+        @keyframes enter {
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        /* Responsive */
+        @media (max-width:1100px) {
+            .slide {
+                height: 72vh
+            }
+
+            .image {
+                display: none
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="deck" id="deck">
+
+        <!-- 1. Title -->
+        <section class="slide" data-index="1">
+            <div class="big-title">
+                <h1>Jadidchilik – Milliy Uyg‘onish va Ozodlik Sari Qadam</h1>
+                <p>Tayyorladi: Qo'rg'onova Gulnoza</p>
+                <p style="color:var(--muted);font-size:13px">To‘liq taqdimot: 16 slayd (reja + 14 mavzu + yakun)</p>
+            </div>
+            <div class="num">1 / 16</div>
+        </section>
+
+        <!-- 2. Reja -->
+        <section class="slide" data-index="2">
+            <header>
+                <div class="title">Reja</div>
+                <div class="author">Qo'rg'onova Gulnoza</div>
+            </header>
+            <div class="content">
+                <div class="text">
+                    <h2>Reja</h2>
+                    <ul class="reja">
+                        <li>Jadidchilikning paydo bo‘lishi va yangi usul maktablari</li>
+                        <li>Turkiston, Buxoro va Xiva jadidchiligi</li>
+                        <li>Jadidchilik namoyandalari va ularning faoliyati</li>
+                        <li>Yosh buxoroliklarning faoliyati va 1920-yil Buxoro inqilobi</li>
+                        <li>Xulosa: Jadidchilikning tarixiy ahamiyati</li>
+                    </ul>
+                </div>
+                <div class="image">
+                    <div class="frame"><img
+                            src="https://commons.wikimedia.org/wiki/Special:FilePath/Abdulhamid_Cholpon.jpg"
+                            alt="Cho'lpon"></div>
+                </div>
+            </div>
+            <div class="num">2 / 16</div>
+        </section>
+
+        <!-- 3. Paydo bo'lishi -->
+        <section class="slide" data-index="3">
+            <header>
+                <div class="title">Jadidchilikning paydo bo‘lishi</div>
+                <div class="author">Qo'rg'onova Gulnoza</div>
+            </header>
+            <div class="content">
+                <div class="text">
+                    <h2>Asosiy g‘oyalar</h2>
+                    <p>Jadidchilik XIX asr oxiri — XX asr boshlarida ushbu hududlarda paydo bo‘lib, an’anaviy madrasaviy
+                        ta’limga muqobil sifatida yangi usul maktablarini yaratdi. Maqsad — xalqni savodxonlik, ma’rifat
+                        va zamonaviy fanlar bilan tanishtirish.</p>
+                </div>
+                <div class="image">
+                    <div class="frame"><img
+                            src="https://commons.wikimedia.org/wiki/Special:FilePath/Fitrat_Buxoro_1908.jpg"
+                            alt="Jadidlar"></div>
+                </div>
+            </div>
+            <div class="num">3 / 16</div>
+        </section>
+
+        <!-- 4. Yangi usul maktablari -->
+        <section class="slide" data-index="4">
+            <header>
+                <div class="title">Yangi usul maktablari</div>
+                <div class="author">Qo'rg'onova Gulnoza</div>
+            </header>
+            <div class="content">
+                <div class="text">
+                    <h2>Metod va o‘qitish</h2>
+                    <p>Yangi usul maktablarida fan, tarix, tabiiy fanlar va ona tili kabi predmetlar o‘qitildi. Ta’lim
+                        zamonaviy pedagogika asosida tashkil etildi va jamiyatni yangilashga hissa qo‘ydi.</p>
+                </div>
+                <div class="image">
+                    <div class="frame"><img
+                            src="https://commons.wikimedia.org/wiki/Special:FilePath/Bukhara%2C_Mir-i-Arab_Medressa_%286234380319%29.jpg"
+                            alt="Mir-i-Arab madrasasi"></div>
+                </div>
+            </div>
+            <div class="num">4 / 16</div>
+        </section>
+
+        <!-- 5. Turkiston jadidlari -->
+        <section class="slide" data-index="5">
+            <header>
+                <div class="title">Turkistonda jadidchilik</div>
+                <div class="author">Qo'rg'onova Gulnoza</div>
+            </header>
+            <div class="content">
+                <div class="text">
+                    <h2>Hududiy ta’sir</h2>
+                    <p>Turkiston hududida jadidlar maktablar, matbuot va madaniyat orqali milliy ongni rivojlantirishga
+                        harakat qildilar. Ularning tashabbuslari mahalliy ijtimoiy tuzumni yangilashga yordam berdi.</p>
+                </div>
+                <div class="image">
+                    <div class="frame"><img
+                            src="https://commons.wikimedia.org/wiki/Special:FilePath/Photograph_of_Mahmud_Khoja_Behbudiy.jpg"
+                            alt="Mahmudkhodja Behbudiy"></div>
+                </div>
+            </div>
+            <div class="num">5 / 16</div>
+        </section>
+
+        <!-- 6. Buxoro jadidlari -->
+        <section class="slide" data-index="6">
+            <header>
+                <div class="title">Buxoro jadidlari</div>
+                <div class="author">Qo'rg'onova Gulnoza</div>
+            </header>
+            <div class="content">
+                <div class="text">
+                    <h2>Buxoro markazi</h2>
+                    <p>Buxoroda jadidchilik maxsus tashkilotlar, darsliklar va jurnal-nashrlar orqali rivojlandi. Bu
+                        yerda madaniy va siyosiy o‘zgarishlarni ilgari surgan ziyolilar faol edi.</p>
+                </div>
+                <div class="image">
+                    <div class="frame"><img
+                            src="https://commons.wikimedia.org/wiki/Special:FilePath/Kalyan_minaret_after_the_Soviet_army_bombed_Bukhara_in_1920_during_the_Bukharian_Revolution.jpg"
+                            alt="Kalyan minaret 1920"></div>
+                </div>
+            </div>
+            <div class="num">6 / 16</div>
+        </section>
+
+        <!-- 7. Xiva jadidlari -->
+        <section class="slide" data-index="7">
+            <header>
+                <div class="title">Xiva jadidlari</div>
+                <div class="author">Qo'rg'onova Gulnoza</div>
+            </header>
+            <div class="content">
+                <div class="text">
+                    <h2>Xiva roli</h2>
+                    <p>Xiva hududida ham jadidlar ma’rifat, darslik va madaniyat sohasida faol ishladi. Ularning
+                        sa’y-harakatlari mahalliy jamiyatni o‘zgartirishga qaratilgan edi.</p>
+                </div>
+                <div class="image">
+                    <div class="frame"><img
+                            src="https://commons.wikimedia.org/wiki/Special:FilePath/Bukhara%2C_Mir-i-Arab_Medressa_%286234380319%29.jpg"
+                            alt="Xiva / madrasalar"></div>
+                </div>
+            </div>
+            <div class="num">7 / 16</div>
+        </section>
+
+        <!-- 8. Behbudiy -->
+        <section class="slide" data-index="8">
+            <header>
+                <div class="title">Mahmudkhodja Behbudiy</div>
+                <div class="author">Qo'rg'onova Gulnoza</div>
+            </header>
+            <div class="content">
+                <div class="text">
+                    <h2>Behbudiy</h2>
+                    <p>Mahmudkhodja Behbudiy jadidchilik harakatining asoschilaridan bo‘lib, muhim asarlar, maktablar va
+                        matbuot orqali xalq ma’rifatini oshirishga xizmat qildi.</p>
+                </div>
+                <div class="image">
+                    <div class="frame"><img
+                            src="https://commons.wikimedia.org/wiki/Special:FilePath/Photograph_of_Mahmud_Khoja_Behbudiy.jpg"
+                            alt="Behbudiy"></div>
+                </div>
+            </div>
+            <div class="num">8 / 16</div>
+        </section>
+
+        <!-- 9. Abdulla Avloniy -->
+        <section class="slide" data-index="9">
+            <header>
+                <div class="title">Abdulla Avloniy</div>
+                <div class="author">Qo'rg'onova Gulnoza</div>
+            </header>
+            <div class="content">
+                <div class="text">
+                    <h2>Avloniy</h2>
+                    <p>Abdulla Avloniy — jadid maktablari va adabiyot rivojiga katta hissa qo‘shgan shaxs. U bolalar
+                        adabiyoti va ta’lim sohasida faol edi.</p>
+                </div>
+                <div class="image">
+                    <div class="frame"><img
+                            src="https://commons.wikimedia.org/wiki/Special:FilePath/Abdulla_Avloniy_4.jpg"
+                            alt="Abdulla Avloniy"></div>
+                </div>
+            </div>
+            <div class="num">9 / 16</div>
+        </section>
+
+        <!-- 10. Fitrat -->
+        <section class="slide" data-index="10">
+            <header>
+                <div class="title">Abdurauf Fitrat</div>
+                <div class="author">Qo'rg'onova Gulnoza</div>
+            </header>
+            <div class="content">
+                <div class="text">
+                    <h2>Fitrat</h2>
+                    <p>Abdurauf Fitrat – yozuvchi, publitsist va siyosiy arbob. Uning asarlari va faoliyati jadidchilik
+                        g‘oyalarini shakllantirishda muhim rol o‘ynadi.</p>
+                </div>
+                <div class="image">
+                    <div class="frame"><img
+                            src="https://commons.wikimedia.org/wiki/Special:FilePath/Fitrat_Buxoro_1908.jpg"
+                            alt="Fitrat 1908"></div>
+                </div>
+            </div>
+            <div class="num">10 / 16</div>
+        </section>
+
+        <!-- 11. Cho'lpon va Qodiriy -->
+        <section class="slide" data-index="11">
+            <header>
+                <div class="title">Cho‘lpon va Abdulla Qodiriy</div>
+                <div class="author">Qo'rg'onova Gulnoza</div>
+            </header>
+            <div class="content">
+                <div class="text">
+                    <h2>Ziyolilar va asarlari</h2>
+                    <p>Cho‘lpon va Abdulla Qodiriyning asarlari xalq ongini uyg‘otishda katta ahamiyatga ega bo‘ldi.
+                        Ularning adabiy merosi milliy uyg‘onish uchun kuchli manba bo‘ldi.</p>
+                </div>
+                <div class="image">
+                    <div class="frame"><img
+                            src="https://commons.wikimedia.org/wiki/Special:FilePath/Abdulhamid_Cholpon.jpg"
+                            alt="Cho'lpon"></div>
+                </div>
+            </div>
+            <div class="num">11 / 16</div>
+        </section>
+
+        <!-- 12. Matbuot va teatr -->
+        <section class="slide" data-index="12">
+            <header>
+                <div class="title">Matbuot va teatr</div>
+                <div class="author">Qo'rg'onova Gulnoza</div>
+            </header>
+            <div class="content">
+                <div class="text">
+                    <h2>Gazeta, jurnal va sahna</h2>
+                    <p>"Taraqqiy", "Sadoi Turkiston", "Oyina" kabi nashrlar va teatr tadbirlari orqali jadidlar
+                        jamiyatdagi muammolarni ko‘tarib, xalqni ma’rifatga chaqirdi.</p>
+                </div>
+                <div class="image">
+                    <div class="frame"><img
+                            src="https://commons.wikimedia.org/wiki/Special:FilePath/Fires_in_Bukhara_1920.jpg"
+                            alt="Matbuot va teatr (tayyorlov)" /></div>
+                </div>
+            </div>
+            <div class="num">12 / 16</div>
+        </section>
+
+        <!-- 13. Yosh buxoroliklar -->
+        <section class="slide" data-index="13">
+            <header>
+                <div class="title">Yosh buxoroliklar</div>
+                <div class="author">Qo'rg'onova Gulnoza</div>
+            </header>
+            <div class="content">
+                <div class="text">
+                    <h2>Tashkilot va yetakchilar</h2>
+                    <p>1910-yillarda Buxoroda "Yosh buxoroliklar" harakati vujudga keldi. Fitrat, Fayzulla Xo‘jayev va
+                        Abduvohid Burhonov bu harakatning asosiy yetakchilari bo‘ldi.</p>
+                </div>
+                <div class="image">
+                    <div class="frame"><img
+                            src="https://commons.wikimedia.org/wiki/Special:FilePath/Youth_Fayzulla_Xo%27jayev.jpg"
+                            alt="Fayzulla Xo'jayev" /></div>
+                </div>
+            </div>
+            <div class="num">13 / 16</div>
+        </section>
+
+        <!-- 14. Buxoro inqilobi 1920 -->
+        <section class="slide" data-index="14">
+            <header>
+                <div class="title">Buxoro inqilobi (1920)</div>
+                <div class="author">Qo'rg'onova Gulnoza</div>
+            </header>
+            <div class="content">
+                <div class="text">
+                    <h2>1920 voqealari</h2>
+                    <p>1920-yilda yosh buxoroliklar Qizil Armiya yordamida amir Olimxonni taxtdan ag‘darib, Buxoro Xalq
+                        Sovet Respublikasi tuzildi. Bu hodisa jadid g‘oyalarining siyosiy namoyishi bo‘ldi.</p>
+                </div>
+                <div class="image">
+                    <div class="frame"><img
+                            src="https://commons.wikimedia.org/wiki/Special:FilePath/19200900-buchara.jpg"
+                            alt="Buxoro 1920" /></div>
+                </div>
+            </div>
+            <div class="num">14 / 16</div>
+        </section>
+
+        <!-- 15. Ta'qib va oqibatlar -->
+        <section class="slide" data-index="15">
+            <header>
+                <div class="title">Jadidlarning ta'qibi</div>
+                <div class="author">Qo'rg'onova Gulnoza</div>
+            </header>
+            <div class="content">
+                <div class="text">
+                    <h2>Qahramonlik va qurbonlik</h2>
+                    <p>Ba'zi jadidlar siyosiy jarayonlarda qurbon bo‘ldilar: ta'qib, hibs va afsuski ijoddan
+                        chetlashtirishlar kuzatildi. Lekin ularning g'oyalari keyingi avlodlarga meros bo‘lib qoldi.</p>
+                </div>
+                <div class="image">
+                    <div class="frame"><img
+                            src="https://commons.wikimedia.org/wiki/Special:FilePath/Abdulla_Qodiriy_1.jpg"
+                            alt="Qodiriy monument" /></div>
+                </div>
+            </div>
+            <div class="num">15 / 16</div>
+        </section>
+
+        <!-- 16. Xulosa & Rahmat -->
+        <section class="slide" data-index="16">
+            <header>
+                <div class="title">Xulosa va Rahmat</div>
+                <div class="author">Qo'rg'onova Gulnoza</div>
+            </header>
+            <div class="content">
+                <div class="text">
+                    <h2>Jadidchilikning tarixiy ahamiyati</h2>
+                    <p>Jadidchilik — milliy uyg‘onish, ma’rifat va ozodlik yo‘lida muhim bir bosqich. Ularning
+                        maktablari, matbuoti va san'ati bugungi madaniy merosimizning asosi bo‘lib xizmat qiladi.</p>
+                    <p style="margin-top:18px;color:var(--muted)">Rahmat — tinglaganing uchun. Savollar bo‘lsa, men
+                        tayyorman.</p>
+                </div>
+                <div class="image">
+                    <div class="frame"><img
+                            src="https://commons.wikimedia.org/wiki/Special:FilePath/Abdulla_Qodiriy_Monument_80.jpg"
+                            alt="Monument" /></div>
+                </div>
+            </div>
+            <div class="num">16 / 16</div>
+        </section>
+
+    </div>
+
+    <!-- Controls -->
+    <div style="position:fixed;right:20px;top:20px;display:flex;gap:8px;z-index:99">
+        <button onclick="prev()">◀ Oldingi</button>
+        <button onclick="next()">Keyingi ▶</button>
+        <button onclick="first()">Boshi</button>
+        <button onclick="last()">Oxiri</button>
+        <button onclick="downloadHTML()">Yuklab olish</button>
+    </div>
+
+    <script>
+        const slides = Array.from(document.querySelectorAll('.slide'));
+        let idx = 0;
+        function show(i) {
+            slides.forEach(s => s.style.display = 'none');
+            slides[i].style.display = 'block';
+            idx = i;
+        }
+        function prev() { show((idx - 1 + slides.length) % slides.length) }
+        function next() { show((idx + 1) % slides.length) }
+        function first() { show(0) }
+        function last() { show(slides.length - 1) }
+        // init
+        show(0);
+        // keyboard
+        window.addEventListener('keydown', e => { if (e.key === 'ArrowRight') next(); if (e.key === 'ArrowLeft') prev(); if (e.key === 'Home') first(); if (e.key === 'End') last(); })
+        // download current HTML file
+        function downloadHTML() {
+            const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a'); a.href = url; a.download = 'Jadidchilik_Slides.html'; a.click(); URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+
+</html>

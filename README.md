@@ -1,1 +1,1 @@
-# Qo-rgonova-Gulnoza-Slide-projact
+# Qo-rgonova-Gulnoza-Slide-project
